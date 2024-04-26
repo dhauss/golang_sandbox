@@ -32,20 +32,21 @@ func main() {
 		}
 	*/
 	myDeck := deck{card, card2}
-	myDeck.print()
+	myDeck.toString()
 
 	cards := newDeck()
-	fmt.Println(cards.toString())
 
 	hand, cards := deal(cards, 5)
 	fmt.Println("Cards:", hand.toString())
-	fmt.Println("Deck:", cards.toString())
 
-	cards.saveToFile("myCards")
+	hand.shuffle()
+	fmt.Println("Shuffled hand: ", hand.toString())
 
-	fmt.Println("\ncardsFromFile")
-	cardsFromFile := newDeckFromFile("myCards")
-	fmt.Println(cardsFromFile.toString())
+	//cards.saveToFile("myCards")
+
+	//fmt.Println("\ncardsFromFile")
+	//cardsFromFile := newDeckFromFile("myCards")
+	//fmt.Println(cardsFromFile.toString())
 }
 
 func newCard() string {
