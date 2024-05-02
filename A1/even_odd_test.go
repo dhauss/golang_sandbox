@@ -6,7 +6,6 @@ func TestEvenOrOdd(t *testing.T) {
 	numSlice := []int{1}
 	resString1 := evenOrOdd(numSlice)
 	expectedString1 := "1 is odd\n"
-
 	if resString1 != expectedString1 {
 		t.Errorf("expected %v, got %v", expectedString1, resString1)
 	}
