@@ -30,6 +30,21 @@ func main() {
 	alex3.firstName = "Alex"
 	alex3.lastName = "Anderson"
 	alex3.contact = contact
-	fmt.Printf("%+v\n", alex3)
+	alex3.print()
 
+	alex3Pointer := &alex3
+	alex3Pointer.updateName("Alexander")
+	alex3.print()
+
+	alex3.updateName("AlexAgain")
+	alex3.print()
+
+}
+
+func (p person) print() {
+	fmt.Printf("%+v\n", p)
+}
+
+func (pPointer *person) updateName(newFirstName string) {
+	(*pPointer).firstName = newFirstName
 }
