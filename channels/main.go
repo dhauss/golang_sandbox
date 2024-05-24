@@ -11,19 +11,27 @@ func main() {
 		"http://stackoverflow.com",
 		"http://golang.org",
 		"http://amazon.com",
-		"sdfssd",
 	}
+
+	c := make(chan string)
 
 	for _, site := range sites {
-		checkStatus(site)
+		go checkStatus(site, c)
 	}
+
+	for i := 0; i < 100; i++ {
+		go checkStatus(<-c, c)
+	}
+
 }
 
-func checkStatus(site string) {
+func checkStatus(site string, c chan string) {
 	_, err := http.Get(site)
 	if err != nil {
-		fmt.Printf("Get error with url: %v\n", site)
+		fmt.Printf("GET error with url: %v\n", site)
+		c <- site
 	} else {
 		fmt.Printf("No problems with url: %v\n", site)
+		c <- site
 	}
 }
