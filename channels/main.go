@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -11,6 +12,8 @@ func main() {
 		"http://stackoverflow.com",
 		"http://golang.org",
 		"http://amazon.com",
+		"http://34t0efuhnaer.crm",
+		"sdfkuuh",
 	}
 
 	c := make(chan string)
@@ -19,8 +22,11 @@ func main() {
 		go checkStatus(site, c)
 	}
 
-	for i := 0; i < 100; i++ {
-		go checkStatus(<-c, c)
+	for l := range c {
+		go func(link string) {
+			time.Sleep(2 * time.Second)
+			checkStatus(link, c)
+		}(l)
 	}
 
 }
